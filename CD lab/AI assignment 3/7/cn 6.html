@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+
+      let ip = "194.56.7.90";
+      console.log("IP address : " + ip);
+
+      let first = "";
+      let second = "";
+      let third = "";
+      let fourth = "";
+
+      function separate(ip) {
+        let str= "";
+        let i = 0;
+        while(ip[i] != '.'){
+          first += ip[i];
+          i++;
+        }
+        i++;
+        while(ip[i] != '.'){
+          second += ip[i];
+          i++;
+        }
+        i++;
+        while(ip[i] != '.'){
+          third += ip[i];
+          i++;
+        }
+        i++;
+        fourth = ip.substr(i);
+
+        // console.log(first + second + third + fourth);
+      }
+
+      separate(ip);
+      let Class = '-1';
+      first = parseInt(first);
+      second = parseInt(second);
+      third = parseInt(third);
+      fourth = parseInt(fourth);
+      function findClass() {
+
+        if(first >= 1 && first <= 126){
+          Class = 'A';
+        }else if(first >= 128 && first <= 191){
+          Class = 'B';
+        }else if(first >= 192 && first <= 223){
+          Class = 'C';
+        }else if(first >= 224 && first <= 239){
+          Class = 'D';
+        }else{
+          Class = 'E';
+        }
+      }
+      findClass();
+      console.log("Class : " + Class);
+
+      function NetHostID(){
+        let netID = "";
+        let HostID = "";
+        if(Class == 'A'){
+          netID = first;
+          HostID = second + "." + third + "." + fourth;
+        }else if(Class == 'B'){
+          netID = first + "." + second;
+          HostID = third + "." + fourth;
+        }else if(Class == 'C'){
+          netID = first + "." +second + "." + third;
+          HostID = fourth;
+        }else{
+          console.log("IP address not dived in Network and Host ID.");
+          return;
+        }
+        console.log("Network ID : " + netID);
+        console.log("Host ID : " + HostID);
+      }
+      NetHostID();
+    </script>
+  </body>
+</html>
